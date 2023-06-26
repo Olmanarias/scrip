@@ -1,5 +1,9 @@
+# Definicion de Variables
+$name = "Omanarias"
+$location = "eastus"
+
 #Crear resource group
-az group create --location eastus --name Olmanarias 
+az group create --location $location --name $name 
 
 #crear storage en location eastus como cuenta principal
 az storage account create --name storageoleast --resource-group Olmanarias --access-tier cool --location eastus --sku Standard_LRS --enable-alw false
@@ -16,6 +20,3 @@ az storage container create --name almacenamiento2 --account-name storageolwest
 #subir un archivo en el container principal
 az storage blob upload --account-name storageoleast --container-name almacenamiento1 --name pug --file .\pugy.jpg
 
-#Crear la redundancia de los storage
-az storage account or-policy create --resource-group Olmanarias --account-name storageoleast --destination-account storageolwest --source-account storageoleast --destination-container almacenamiento2 --source-container almacenamiento1
-    
