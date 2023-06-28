@@ -21,7 +21,7 @@ $adminpass2 = "Noecuevas24?"
 $image = "Ubuntu2204"
 
 #Crear resource group
-az group create --location $location --name $resourcegroup
+    az group create --location $location --name $resourcegroup
 
 #Crear un segundo resource group
 az group create --location $location2 --name $resourcegroup2
@@ -32,8 +32,12 @@ az network vnet create --name $namevnet --resource-group $resourcegroup --locati
 #Crear segunda vnet
 az network vnet create --name $namevnet2 --resource-group $resourcegroup2 --location $location2 --address-prefix $prefix2 --subnet-name $subnetname2 --subnet-prefix $subnetprefix2
 
+# Recuperando ID de las VNETs
+$vnet1Id=$(az network vnet show --resource-group $resourcegroup --name $namevnet --query id --out tsv)
+$vnet2Id=$(az network vnet show --resource-group $resourcegroup2 --name $namevnet2 --query id --out tsv)
+
 #crear un peering
-az network vnet peering create --resource-group $resourcegroup --name $peering --vnet-name $namevnet --remote-vnet $namevnet2 --allow-forwarded-traffic yes --allow-vnet-access yes
+az network vnet peering create --resource-group $resourcegroup --name $peering --vnet-name $namevnet --remote-vnet $vnet2Id --allow-forwarded-traffic yes --allow-vnet-access yes
 
 #Crear una vm unido en la primera net
 az vm create --resource-group $resourcegroup --name $VM1 --image $image --vnet-name $namevnet --size Standard_B1s --admin-username $adminname1 --admin-password $adminpass1
