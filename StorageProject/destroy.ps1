@@ -1,5 +1,5 @@
 # Definicion de Variables
-$name = "recursos1"
+$name = "Recursos"
 $name2 = "recursos2"
 
 #Eliminar resource group
