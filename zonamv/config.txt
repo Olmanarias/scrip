@@ -1,0 +1,20 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - apache2
+write_files:
+  - owner: www-data:www-data
+    path: /var/www/html/index.html
+    content: Esta es la maquina virtual VM01
+runcmd:
+  - service apache2 start
+#cloud-config
+package_upgrade: true
+packages:
+  - apache2
+write_files:
+  - owner: www-data:www-data
+    path: /var/www/html/index.html
+    content: Esta es la maquina virtual VM02
+runcmd:
+  - service apache2 start
